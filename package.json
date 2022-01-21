@@ -9,6 +9,7 @@
     "start": "node dist/server.js"
   },
   "dependencies": {
+    "@prisma/client": "^3.8.1",
     "dotenv": "^13.0.1",
     "express": "^4.17.2",
     "module-alias": "^2.2.2"
@@ -34,6 +35,6 @@
     "@": "dist"
   },
   "prisma": {
-    "schema": "src/infra/schema.prisma"
+    "schema": "src/infra/prisma/schema.prisma"
   }
 }
