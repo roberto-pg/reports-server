@@ -1,10 +1,12 @@
-import express from 'express'
-require('dotenv').config()
+import 'module-alias/register'
+import { env } from '@/main/config/env'
 
-const app = express()
+async function initApp(): Promise<any> {
+  const { setupApp } = await import('./config/app')
+  const app = await setupApp()
+  return app.listen(env.port, () =>
+    console.log(`Server started at Port ${env.port}`)
+  )
+}
 
-app.use(express.json())
-
-app.listen(process.env.port, () =>
-  console.log(`Server started at Port ${process.env.port}`)
-)
+initApp()
