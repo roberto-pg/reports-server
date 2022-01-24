@@ -1,7 +1,7 @@
-import { IHttpService } from '@/infra/contracts'
+import { HttpService } from '@/infra/protocols'
 import { PrismaClient } from '@prisma/client'
 
-export class PrismaServer implements IHttpService {
+export class PrismaServer implements HttpService {
   connectAny() {
     throw new Error('Method not implemented.')
   }

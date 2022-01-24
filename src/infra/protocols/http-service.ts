@@ -1,5 +1,5 @@
 import { PrismaClient } from '@prisma/client'
 
-export interface IHttpService {
+export interface HttpService {
   connectPrisma(): PrismaClient
 }

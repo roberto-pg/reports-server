@@ -1,9 +1,9 @@
-import { IAddUserRepository } from '@/data/contracts/add-user-repository'
+import { AddUserRepository } from '@/data/protocols/add-user-repository'
 import { UserModel } from '@/data/models/user'
-import { IHttpService } from '@/infra/contracts'
+import { HttpService } from '@/infra/protocols'
 
-export class AddUserRepositoryImpl implements IAddUserRepository {
-  constructor(private readonly prismaServer: IHttpService) {}
+export class AddUserRepositoryImpl implements AddUserRepository {
+  constructor(private readonly prismaServer: HttpService) {}
 
   async add(
     name: string,

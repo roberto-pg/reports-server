@@ -1,6 +1,6 @@
 import { User } from '@/domain/entities'
 
-export interface IAddUser {
+export interface AddUserUseCase {
   add: (
     name: string,
     email: string,

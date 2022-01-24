@@ -1,6 +1,6 @@
 import { UserModel } from '@/data/models'
 
-export interface IAddUserRepository {
+export interface AddUserRepository {
   add: (
     name: string,
     email: string,
