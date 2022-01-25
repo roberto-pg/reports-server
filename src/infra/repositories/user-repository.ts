@@ -1,11 +1,11 @@
-import { AddUserRepository } from '@/data/protocols/add-user-repository'
+import { UserRepository } from '@/data/protocols'
 import { UserModel } from '@/data/models/user'
 import { HttpService } from '@/infra/protocols'
 
-export class AddUserRepositoryImpl implements AddUserRepository {
+export class UserRepositoryImpl implements UserRepository {
   constructor(private readonly prismaServer: HttpService) {}
 
-  async add(
+  async addUser(
     name: string,
     email: string,
     cpf: string,
@@ -21,5 +21,16 @@ export class AddUserRepositoryImpl implements AddUserRepository {
     })
 
     return user
+  }
+
+  async checkEmailExists(email: string): Promise<Boolean> {
+    const user = await this.prismaServer.connectPrisma().user.findUnique({
+      where: {
+        email: email
+      }
+    })
+    if (user) {
+      return true
+    }
   }
 }
