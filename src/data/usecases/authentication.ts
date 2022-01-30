@@ -44,10 +44,6 @@ export class AuthenticationUseCaseImpl implements AuthenticationUseCase {
 
     setUserCache(user.id)
 
-    // const { userId } = await this.decrypter.decrypt(token)
-
-    // console.log(userId)
-
     const serializedUser = {
       id: user.id,
       name: user.name,

@@ -70,4 +70,14 @@ export class UserRepositoryImpl implements UserRepository {
     const users = await this.prismaServer.connectPrisma().user.findMany()
     return users
   }
+
+  async loadUserById(userId: string): Promise<UserModel> {
+    const user = await this.prismaServer.connectPrisma().user.findUnique({
+      where: {
+        id: userId
+      }
+    })
+
+    return user
+  }
 }

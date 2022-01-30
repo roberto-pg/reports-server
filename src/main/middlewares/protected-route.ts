@@ -3,7 +3,7 @@ import { NextFunction, Request, Response } from 'express'
 import { verify } from 'jsonwebtoken'
 
 interface IPayload {
-  sub: string
+  userId: string
 }
 
 export async function protectedRoute(
@@ -28,8 +28,8 @@ export async function protectedRoute(
   // }
 
   try {
-    const { sub } = verify(token, env.secretKey) as IPayload
-    request.userId = sub
+    const { userId } = verify(token, env.secretKey) as IPayload
+    request.userId = userId
 
     return next()
   } catch (error) {
