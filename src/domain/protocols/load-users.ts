@@ -1,5 +1,5 @@
 import { User } from '@/domain/entities'
 
-export interface LoadUsers {
+export interface LoadUsersUseCase {
   load: () => Promise<User[]>
 }

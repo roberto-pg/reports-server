@@ -65,4 +65,9 @@ export class UserRepositoryImpl implements UserRepository {
 
     return user
   }
+
+  async loadUsers(): Promise<UserModel[]> {
+    const users = await this.prismaServer.connectPrisma().user.findMany()
+    return users
+  }
 }

@@ -11,4 +11,5 @@ export interface UserRepository {
   checkCpfExists: (cpf: string) => Promise<Boolean>
   loadPassword: (cpf: string) => Promise<string>
   authenticateUser: (cpf: string, password: string) => Promise<UserModel>
+  loadUsers: () => Promise<UserModel[]>
 }
