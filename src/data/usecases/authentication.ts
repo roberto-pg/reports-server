@@ -3,6 +3,7 @@ import { UserRepository } from '@/data/protocols'
 import { UserModel } from '@/data/models'
 import { CpfValidator } from '../protocols/cpf'
 import { UseCaseError } from '@/data/errors'
+import { setUserCache } from '@/infra/db/redis'
 import {
   HashComparer,
   Encrypter,
@@ -40,6 +41,8 @@ export class AuthenticationUseCaseImpl implements AuthenticationUseCase {
     const user = await this.repository.authenticateUser(cpf, password)
 
     const token = await this.encrypter.encrypt(user.id)
+
+    setUserCache(user.id)
 
     // const { userId } = await this.decrypter.decrypt(token)
 
