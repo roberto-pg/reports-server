@@ -16,7 +16,6 @@ export const authenticationController = (): Controller => {
     repository,
     cpfValidator,
     passwordCompare,
-    jwtAdapter,
     jwtAdapter
   )
 

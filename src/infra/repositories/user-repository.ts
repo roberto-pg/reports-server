@@ -56,7 +56,7 @@ export class UserRepositoryImpl implements UserRepository {
     return user.password
   }
 
-  async authenticateUser(cpf: string, password: string): Promise<UserModel> {
+  async authenticateUser(cpf: string): Promise<UserModel> {
     const user = await this.prismaServer.connectPrisma().user.findUnique({
       where: {
         cpf
@@ -79,5 +79,15 @@ export class UserRepositoryImpl implements UserRepository {
     })
 
     return user
+  }
+
+  async deleteUserById(id: string): Promise<string> {
+    const user = await this.prismaServer.connectPrisma().user.delete({
+      where: {
+        id
+      }
+    })
+
+    return user.id
   }
 }

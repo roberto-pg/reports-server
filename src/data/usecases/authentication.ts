@@ -4,19 +4,14 @@ import { UserModel } from '@/data/models'
 import { CpfValidator } from '../protocols/cpf'
 import { UseCaseError } from '@/data/errors'
 import { setUserCache } from '@/infra/db/redis'
-import {
-  HashComparer,
-  Encrypter,
-  Decrypter
-} from '@/data/protocols/cryptography'
+import { HashComparer, Encrypter } from '@/data/protocols/cryptography'
 
 export class AuthenticationUseCaseImpl implements AuthenticationUseCase {
   constructor(
     private readonly repository: UserRepository,
     private readonly cpfValidate: CpfValidator,
     private readonly passwordCompare: HashComparer,
-    private readonly encrypter: Encrypter,
-    private readonly decrypter: Decrypter
+    private readonly encrypter: Encrypter
   ) {}
 
   async auth(cpf: string, password: string): Promise<UserModel> {
@@ -38,7 +33,7 @@ export class AuthenticationUseCaseImpl implements AuthenticationUseCase {
       throw new UseCaseError('Senha inválida')
     }
 
-    const user = await this.repository.authenticateUser(cpf, password)
+    const user = await this.repository.authenticateUser(cpf)
 
     const token = await this.encrypter.encrypt(user.id)
 

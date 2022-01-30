@@ -3,7 +3,8 @@ import {
   addUserController,
   authenticationController,
   loadUsersController,
-  loadUserByIdController
+  loadUserByIdController,
+  deleteUserByIdController
 } from '@/main/factories'
 import { adaptRoute } from '@/main/adapters'
 import { protectedRoute } from '@/main/middlewares'
@@ -16,5 +17,10 @@ export default (router: Router): void => {
     '/user-by-id',
     protectedRoute,
     adaptRoute(loadUserByIdController())
+  )
+  router.delete(
+    '/delete-user/:id',
+    protectedRoute,
+    adaptRoute(deleteUserByIdController())
   )
 }
