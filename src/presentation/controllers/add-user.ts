@@ -1,10 +1,10 @@
 import { Controller, HttpResponse } from '@/presentation/protocols'
-import { User } from '@/presentation/view-models'
+import { UserViewModel } from '@/presentation/view-models'
 import { AddUserUseCase } from '@/domain/protocols'
 import { serverError, serverSuccess } from '@/presentation/helpers'
 import { CustomError } from '@/presentation/errors'
 
-type TypeRequest = {
+type AddUserRequest = {
   name: string
   email: string
   cpf: string
@@ -14,7 +14,7 @@ type TypeRequest = {
 export class AddUserController implements Controller {
   constructor(private readonly addUser: AddUserUseCase) {}
 
-  async handle(request: TypeRequest): Promise<HttpResponse<User>> {
+  async handle(request: AddUserRequest): Promise<HttpResponse<UserViewModel>> {
     try {
       if (!request.name) {
         throw new CustomError('Informe o nome')

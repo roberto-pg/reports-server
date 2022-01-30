@@ -1,0 +1,57 @@
+version: "3"
+
+networks:
+  report:
+    driver: bridge
+
+services: 
+  postgres:
+    image: bitnami/postgresql:latest
+    container_name: report-postgres
+    volumes: 
+      - /home/rpg/Docker/report-postgres:/bitnami/postgresql
+    restart: always
+    environment:
+      - POSTGRESQL_POSTGRES_PASSWORD=${DB_PASS_ROOT}
+      - POSTGRESQL_DATABASE=${DB_NAME} 
+      - POSTGRESQL_USERNAME=${DB_USER}
+      - POSTGRESQL_PASSWORD=${DB_PASS}
+    networks: 
+      - report
+
+  nginx:
+    image: nginx
+    container_name: report-nginx
+    ports:
+      - "8282:80"
+    volumes:
+      - /home/rpg/Docker/report-nginx/html:/usr/share/nginx/html
+    restart: always
+    networks:
+      - report
+       
+  app:
+    image: node:current-alpine
+    container_name: report-server
+    ports:
+      - "3335:3335"
+    working_dir: /usr/app
+    volumes: 
+      - .:/usr/app
+      - /home/rpg/Docker/report-nginx/html:/usr/app/public/images
+    command: sh -c "yarn && yarn build && yarn start" 
+    restart: always
+    networks: 
+      - report
+
+  redis:
+    image: bitnami/redis:latest
+    container_name: report-redis
+    environment:
+      - ALLOW_EMPTY_PASSWORD=no
+      - REDIS_PASSWORD=${REDIS_PASS}
+    restart: "always"
+    networks: 
+      - report
+
+    

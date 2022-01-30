@@ -13,12 +13,14 @@
     "bcryptjs": "^2.4.3",
     "dotenv": "^13.0.1",
     "express": "^4.17.2",
+    "jsonwebtoken": "^8.5.1",
     "module-alias": "^2.2.2",
     "validator": "^13.7.0"
   },
   "devDependencies": {
     "@types/bcryptjs": "^2.4.2",
     "@types/express": "^4.17.13",
+    "@types/jsonwebtoken": "^8.5.8",
     "@types/validator": "^13.7.1",
     "@typescript-eslint/eslint-plugin": "^5.9.1",
     "@typescript-eslint/parser": "^5.9.1",

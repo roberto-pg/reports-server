@@ -36,6 +36,12 @@ export class AddUserUseCaseImpl implements AddUserUseCase {
       throw new UseCaseError('Informe um CPF válido')
     }
 
+    const cpfExists = await this.repository.checkCpfExists(cpf)
+
+    if (cpfExists) {
+      throw new UseCaseError('O CPF já existe')
+    }
+
     if (password.length < 6) {
       throw new UseCaseError('A senha tem menos de 6 dígitos')
     }
