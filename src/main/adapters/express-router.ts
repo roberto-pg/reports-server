@@ -8,6 +8,7 @@ export const adaptRoute = (controller: Controller) => {
       ...(request.params || {}),
       userId: request.userId
     }
+
     const httpResponse = await controller.handle(requestBody)
     response.status(httpResponse.statusCode).json(httpResponse.data)
   }

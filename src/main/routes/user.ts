@@ -4,7 +4,8 @@ import {
   authenticationController,
   loadUsersController,
   loadUserByIdController,
-  deleteUserByIdController
+  deleteUserByIdController,
+  updatePasswordController
 } from '@/main/factories'
 import { adaptRoute } from '@/main/adapters'
 import { protectedRoute } from '@/main/middlewares'
@@ -22,5 +23,10 @@ export default (router: Router): void => {
     '/delete-user/:id',
     protectedRoute,
     adaptRoute(deleteUserByIdController())
+  )
+  router.patch(
+    '/change-password',
+    protectedRoute,
+    adaptRoute(updatePasswordController())
   )
 }

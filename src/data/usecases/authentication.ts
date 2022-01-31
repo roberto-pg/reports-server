@@ -29,7 +29,12 @@ export class AuthenticationUseCaseImpl implements AuthenticationUseCase {
 
     const dbPassword = await this.repository.loadPassword(cpf)
 
-    if (!(await this.passwordCompare.compare(password, dbPassword))) {
+    const passwordCheck = await this.passwordCompare.compare(
+      password,
+      dbPassword
+    )
+
+    if (!passwordCheck) {
       throw new UseCaseError('Senha inválida')
     }
 
