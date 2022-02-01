@@ -5,7 +5,8 @@ import {
   loadUsersController,
   loadUserByIdController,
   deleteUserByIdController,
-  updatePasswordController
+  updatePasswordController,
+  logoutController
 } from '@/main/factories'
 import { adaptRoute } from '@/main/adapters'
 import { protectedRoute } from '@/main/middlewares'
@@ -29,4 +30,5 @@ export default (router: Router): void => {
     protectedRoute,
     adaptRoute(updatePasswordController())
   )
+  router.post('/logout', protectedRoute, adaptRoute(logoutController()))
 }
