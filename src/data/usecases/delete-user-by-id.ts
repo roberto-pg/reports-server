@@ -1,5 +1,5 @@
 import { DeleteUserByIdUseCase } from '@/domain/protocols'
-import { UserRepository } from '@/data/protocols'
+import { UserRepository } from '@/data/protocols/users'
 
 export class DeleteUserByIdUseCaseImpl implements DeleteUserByIdUseCase {
   constructor(private readonly repository: UserRepository) {}

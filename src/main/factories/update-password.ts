@@ -1,16 +1,21 @@
 import { UpdatePasswordController } from '@/presentation/controllers'
 import { Controller } from '@/presentation/protocols'
 import { UpdatePasswordUseCaseImpl } from '@/data/usecases'
-import { UserRepositoryImpl } from '@/infra/repositories'
+import {
+  AuthRepositoryImpl,
+  UserRepositoryImpl
+} from '@/infra/repositories/users'
 import { PrismaServer } from '@/infra/db/postgres'
 import { BcryptAdapter } from '@/infra/cryptography'
 
 export const updatePasswordController = (): Controller => {
   const prisma = new PrismaServer()
-  const repository = new UserRepositoryImpl(prisma)
+  const userRepository = new UserRepositoryImpl(prisma)
+  const authRepository = new AuthRepositoryImpl(prisma)
   const passwordCompare = new BcryptAdapter()
   const updatePassword = new UpdatePasswordUseCaseImpl(
-    repository,
+    userRepository,
+    authRepository,
     passwordCompare,
     passwordCompare
   )

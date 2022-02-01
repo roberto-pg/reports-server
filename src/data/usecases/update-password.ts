@@ -1,11 +1,12 @@
 import { UpdatePasswordUseCase } from '@/domain/protocols'
-import { UserRepository } from '@/data/protocols'
+import { AuthRepository, UserRepository } from '@/data/protocols/users'
 import { HashComparer, Hasher } from '@/data/protocols/cryptography'
 import { UseCaseError } from '@/data/errors'
 
 export class UpdatePasswordUseCaseImpl implements UpdatePasswordUseCase {
   constructor(
-    private readonly repository: UserRepository,
+    private readonly userRepository: UserRepository,
+    private readonly authRepository: AuthRepository,
     private readonly passwordCompare: HashComparer,
     private readonly hasher: Hasher
   ) {}
@@ -19,7 +20,7 @@ export class UpdatePasswordUseCaseImpl implements UpdatePasswordUseCase {
       throw new UseCaseError('A nova senha tem menos de 6 dígitos')
     }
 
-    const dbPassword = await this.repository.loadPasswordById(id)
+    const dbPassword = await this.authRepository.loadPasswordById(id)
 
     const passwordCheck = await this.passwordCompare.compare(
       oldPassword,
@@ -32,7 +33,7 @@ export class UpdatePasswordUseCaseImpl implements UpdatePasswordUseCase {
 
     const hashPassword = await this.hasher.hash(newPassword)
 
-    const result = await this.repository.updatePassword(id, hashPassword)
+    const result = await this.userRepository.updatePassword(id, hashPassword)
     return result
   }
 }

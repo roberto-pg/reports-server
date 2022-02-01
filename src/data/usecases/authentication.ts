@@ -1,14 +1,15 @@
 import { AuthenticationUseCase } from '@/domain/protocols'
-import { UserRepository } from '@/data/protocols'
+import { AuthRepository, UserRepository } from '@/data/protocols/users'
 import { UserModel } from '@/data/models'
-import { CpfValidator } from '../protocols/cpf'
+import { CpfValidator } from '../protocols/validators/cpf'
 import { UseCaseError } from '@/data/errors'
 import { setUserCache } from '@/infra/db/redis'
 import { HashComparer, Encrypter } from '@/data/protocols/cryptography'
 
 export class AuthenticationUseCaseImpl implements AuthenticationUseCase {
   constructor(
-    private readonly repository: UserRepository,
+    private readonly userRepository: UserRepository,
+    private readonly authRepository: AuthRepository,
     private readonly cpfValidate: CpfValidator,
     private readonly passwordCompare: HashComparer,
     private readonly encrypter: Encrypter
@@ -21,13 +22,13 @@ export class AuthenticationUseCaseImpl implements AuthenticationUseCase {
       throw new UseCaseError('Informe um CPF válido')
     }
 
-    const cpfExists = await this.repository.checkCpfExists(cpf)
+    const cpfExists = await this.authRepository.checkCpfExists(cpf)
 
     if (!cpfExists) {
       throw new UseCaseError('CPF não cadastrado')
     }
 
-    const dbPassword = await this.repository.loadPassword(cpf)
+    const dbPassword = await this.authRepository.loadPassword(cpf)
 
     const passwordCheck = await this.passwordCompare.compare(
       password,
@@ -38,7 +39,7 @@ export class AuthenticationUseCaseImpl implements AuthenticationUseCase {
       throw new UseCaseError('Senha inválida')
     }
 
-    const user = await this.repository.authenticateUser(cpf)
+    const user = await this.authRepository.authenticateUser(cpf)
 
     const token = await this.encrypter.encrypt(user.id)
 

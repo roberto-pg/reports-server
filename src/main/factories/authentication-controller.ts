@@ -1,7 +1,10 @@
 import { Controller } from '@/presentation/protocols'
 import { AuthenticationController } from '@/presentation/controllers'
 import { AuthenticationUseCaseImpl } from '@/data/usecases'
-import { UserRepositoryImpl } from '@/infra/repositories'
+import {
+  AuthRepositoryImpl,
+  UserRepositoryImpl
+} from '@/infra/repositories/users'
 import { PrismaServer } from '@/infra/db/postgres'
 import { CpfValidatorImpl } from '@/validation/validators'
 import { BcryptAdapter, JwtAdapter } from '@/infra/cryptography'
@@ -11,9 +14,11 @@ export const authenticationController = (): Controller => {
   const cpfValidator = new CpfValidatorImpl()
   const passwordCompare = new BcryptAdapter()
   const jwtAdapter = new JwtAdapter()
-  const repository = new UserRepositoryImpl(prisma)
+  const userRepository = new UserRepositoryImpl(prisma)
+  const authRepository = new AuthRepositoryImpl(prisma)
   const authUser = new AuthenticationUseCaseImpl(
-    repository,
+    userRepository,
+    authRepository,
     cpfValidator,
     passwordCompare,
     jwtAdapter

@@ -1,6 +1,6 @@
 import { UserModel } from '@/data/models'
 import { LoadUserByIdUseCase } from '@/domain/protocols'
-import { UserRepository } from '@/data/protocols'
+import { UserRepository } from '@/data/protocols/users'
 
 export class LoadUserByIdUseCaseImpl implements LoadUserByIdUseCase {
   constructor(private readonly repository: UserRepository) {}

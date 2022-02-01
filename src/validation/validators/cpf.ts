@@ -1,4 +1,4 @@
-import { CpfValidator } from '@/data/protocols'
+import { CpfValidator } from '@/data/protocols/validators'
 
 export class CpfValidatorImpl implements CpfValidator {
   isValidCPF(cpf: string): Boolean {

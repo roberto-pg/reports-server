@@ -1,12 +1,14 @@
 import { User } from '@/domain/entities'
 import { AddUserUseCase } from '@/domain/protocols'
-import { UserRepository, EmailValidator, CpfValidator } from '@/data/protocols'
+import { AuthRepository, UserRepository } from '@/data/protocols/users'
 import { UseCaseError } from '@/data/errors'
 import { Hasher } from '@/data/protocols/cryptography'
+import { CpfValidator, EmailValidator } from '@/data/protocols/validators'
 
 export class AddUserUseCaseImpl implements AddUserUseCase {
   constructor(
-    private readonly repository: UserRepository,
+    private readonly userRepository: UserRepository,
+    private readonly authRepository: AuthRepository,
     private readonly emailValidate: EmailValidator,
     private readonly cpfValidate: CpfValidator,
     private readonly hasher: Hasher
@@ -24,7 +26,7 @@ export class AddUserUseCaseImpl implements AddUserUseCase {
       throw new UseCaseError('Informe um email válido')
     }
 
-    const emailExists = await this.repository.checkEmailExists(email)
+    const emailExists = await this.authRepository.checkEmailExists(email)
 
     if (emailExists) {
       throw new UseCaseError('O email já existe')
@@ -36,7 +38,7 @@ export class AddUserUseCaseImpl implements AddUserUseCase {
       throw new UseCaseError('Informe um CPF válido')
     }
 
-    const cpfExists = await this.repository.checkCpfExists(cpf)
+    const cpfExists = await this.authRepository.checkCpfExists(cpf)
 
     if (cpfExists) {
       throw new UseCaseError('O CPF já existe')
@@ -48,7 +50,12 @@ export class AddUserUseCaseImpl implements AddUserUseCase {
 
     const hashPassword = await this.hasher.hash(password)
 
-    const user = await this.repository.addUser(name, email, cpf, hashPassword)
+    const user = await this.userRepository.addUser(
+      name,
+      email,
+      cpf,
+      hashPassword
+    )
 
     user.password = undefined
 

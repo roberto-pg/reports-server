@@ -1,7 +1,7 @@
 import { LoadUsersController } from '@/presentation/controllers'
 import { Controller } from '@/presentation/protocols'
 import { LoadUsersUseCaseImpl } from '@/data/usecases'
-import { UserRepositoryImpl } from '@/infra/repositories'
+import { UserRepositoryImpl } from '@/infra/repositories/users'
 import { PrismaServer } from '@/infra/db/postgres'
 
 export const loadUsersController = (): Controller => {
