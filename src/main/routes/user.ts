@@ -7,7 +7,7 @@ import {
   deleteUserByIdController,
   updatePasswordController,
   logoutController
-} from '@/main/factories'
+} from '@/main/factories/user'
 import { adaptRoute } from '@/main/adapters'
 import { protectedRoute } from '@/main/middlewares'
 
