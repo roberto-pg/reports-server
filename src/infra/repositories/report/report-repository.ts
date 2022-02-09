@@ -1,6 +1,5 @@
 import { ReportModel } from '@/data/models'
 import { ReportRepository } from '@/data/protocols/report'
-import { Report } from '@/domain/entities'
 import { HttpService } from '@/infra/protocols'
 
 export class ReportRepositoryImpl implements ReportRepository {
@@ -24,13 +23,13 @@ export class ReportRepositoryImpl implements ReportRepository {
     return report
   }
 
-  async loadReports(userId: string): Promise<Report[]> {
-    const result = await this.prismaServer.connectPrisma().report.findMany({
+  async loadReports(userId: string): Promise<ReportModel[]> {
+    const reports = await this.prismaServer.connectPrisma().report.findMany({
       where: {
         user_id: userId
       }
     })
-    return result
+    return reports
   }
 
   async update(
@@ -40,7 +39,7 @@ export class ReportRepositoryImpl implements ReportRepository {
     stopedAt: string,
     finished: boolean
   ): Promise<string> {
-    const result = await this.prismaServer.connectPrisma().report.update({
+    const report = await this.prismaServer.connectPrisma().report.update({
       data: {
         final_description: finalDescription,
         final_image: finalImage,
@@ -52,16 +51,40 @@ export class ReportRepositoryImpl implements ReportRepository {
       }
     })
 
-    return result.id
+    return report.id
   }
 
-  async loadReportById(reportId: string): Promise<Report> {
-    const result = await this.prismaServer.connectPrisma().report.findUnique({
+  async loadReportById(reportId: string): Promise<ReportModel> {
+    const report = await this.prismaServer.connectPrisma().report.findUnique({
       where: {
         id: reportId
       }
     })
 
-    return result
+    return report
+  }
+
+  async loadReportsFinished(
+    userId: string,
+    finished: boolean
+  ): Promise<ReportModel[]> {
+    const reports = await this.prismaServer.connectPrisma().report.findMany({
+      where: {
+        user_id: userId,
+        finished
+      }
+    })
+
+    return reports
+  }
+
+  async deleteReportById(id: string): Promise<string> {
+    const result = await this.prismaServer.connectPrisma().report.delete({
+      where: {
+        id
+      }
+    })
+
+    return result.id
   }
 }

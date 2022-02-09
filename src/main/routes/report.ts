@@ -5,6 +5,7 @@ import {
   addReportController,
   loadReportByIdController,
   loadReportsByUserController,
+  loadReportsFinishedController,
   updateReportController
 } from '@/main/factories/report'
 import multer from 'multer'
@@ -35,5 +36,11 @@ export default (router: Router): void => {
     '/report-by-id/:reportId',
     protectedRoute,
     adaptRoute(loadReportByIdController())
+  )
+
+  router.get(
+    '/finished-reports',
+    protectedRoute,
+    adaptRoute(loadReportsFinishedController())
   )
 }
