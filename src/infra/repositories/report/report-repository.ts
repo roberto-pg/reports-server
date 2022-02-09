@@ -1,5 +1,6 @@
 import { ReportModel } from '@/data/models'
 import { ReportRepository } from '@/data/protocols/report'
+import { Report } from '@/domain/entities'
 import { HttpService } from '@/infra/protocols'
 
 export class ReportRepositoryImpl implements ReportRepository {
@@ -21,5 +22,46 @@ export class ReportRepositoryImpl implements ReportRepository {
     })
 
     return report
+  }
+
+  async loadReports(userId: string): Promise<Report[]> {
+    const result = await this.prismaServer.connectPrisma().report.findMany({
+      where: {
+        user_id: userId
+      }
+    })
+    return result
+  }
+
+  async update(
+    id: string,
+    finalDescription: string,
+    finalImage: string,
+    stopedAt: string,
+    finished: boolean
+  ): Promise<string> {
+    const result = await this.prismaServer.connectPrisma().report.update({
+      data: {
+        final_description: finalDescription,
+        final_image: finalImage,
+        stoped_at: stopedAt,
+        finished: finished
+      },
+      where: {
+        id
+      }
+    })
+
+    return result.id
+  }
+
+  async loadReportById(reportId: string): Promise<Report> {
+    const result = await this.prismaServer.connectPrisma().report.findUnique({
+      where: {
+        id: reportId
+      }
+    })
+
+    return result
   }
 }

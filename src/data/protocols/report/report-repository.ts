@@ -7,4 +7,13 @@ export interface ReportRepository {
     initialImage: string,
     startedAt: string
   ) => Promise<ReportModel>
+  loadReports: (userId: string) => Promise<ReportModel[]>
+  update: (
+    id: string,
+    finalDescription: string,
+    finalImage: string,
+    stopedAt: string,
+    finished: boolean
+  ) => Promise<string>
+  loadReportById: (reportId: string) => Promise<ReportModel>
 }

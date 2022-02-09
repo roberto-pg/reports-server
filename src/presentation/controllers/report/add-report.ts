@@ -7,7 +7,7 @@ import { env } from '@/main/config/env'
 type AddReportRequest = {
   userId: string
   initialDescription: string
-  initialImage: string
+  imageUrl: string
   startedAt: string
 }
 
@@ -17,12 +17,12 @@ export class AddReportController implements Controller {
   async handle(
     request: AddReportRequest
   ): Promise<HttpResponse<ReportViewModel>> {
-    const imageUrl = env.dirImage + request.initialImage
+    const initialImage = env.dirImage + request.imageUrl
     try {
       const report = await this.addReport.add(
         request.userId,
         request.initialDescription,
-        imageUrl,
+        initialImage,
         request.startedAt
       )
       return serverSuccess(ReportViewModel.map(report))
