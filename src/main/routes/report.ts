@@ -6,7 +6,8 @@ import {
   loadReportByIdController,
   loadReportsByUserController,
   loadReportsFinishedController,
-  updateReportController
+  updateReportController,
+  deleteReportByIdController
 } from '@/main/factories/report'
 import multer from 'multer'
 const multerConfig = require('../middlewares/multer')
@@ -42,5 +43,11 @@ export default (router: Router): void => {
     '/finished-reports',
     protectedRoute,
     adaptRoute(loadReportsFinishedController())
+  )
+
+  router.delete(
+    '/delete-report',
+    protectedRoute,
+    adaptRoute(deleteReportByIdController())
   )
 }
