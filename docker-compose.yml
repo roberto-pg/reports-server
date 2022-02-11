@@ -23,7 +23,7 @@ services:
     image: nginx
     container_name: report-nginx
     ports:
-      - "8282:80"
+      - "8383:80"
     volumes:
       - /home/rpg/Docker/report-nginx/html:/usr/share/nginx/html
     restart: always
