@@ -34,7 +34,7 @@ services:
     image: node:current-alpine
     container_name: report-server
     ports:
-      - "3335:3335"
+      - "3337:3337"
     working_dir: /usr/app
     volumes: 
       - .:/usr/app
