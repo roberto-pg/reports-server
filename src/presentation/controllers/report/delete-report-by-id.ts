@@ -1,7 +1,7 @@
+import { errorMessage } from '@/data/errors'
 import { DeleteReportByIdUseCaseImpl } from '@/data/usecases/report'
 import { serverError, serverSuccess } from '@/presentation/helpers'
 import { Controller, HttpResponse } from '@/presentation/protocols'
-import { CustomError } from '../../errors/custom-error'
 
 type DeleteRequest = {
   id: string
@@ -15,15 +15,15 @@ export class DeleteReportByIdController implements Controller {
   async handle(request: DeleteRequest): Promise<HttpResponse<string>> {
     try {
       if (!request.id) {
-        throw new CustomError('Informe o ID do relatório')
+        return errorMessage('Informe o ID do relatório')
       }
 
       if (!request.initial) {
-        throw new CustomError('Informe o título da imagem inicial')
+        return errorMessage('Informe o título da imagem inicial')
       }
 
       if (!request.final) {
-        throw new CustomError('Informe o título da imagem final')
+        return errorMessage('Informe o título da imagem final')
       }
 
       const result = await this.deleteUseCase.delete(

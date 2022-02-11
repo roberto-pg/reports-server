@@ -1,9 +1,9 @@
 import { User } from '@/domain/entities'
 import { AddUserUseCase } from '@/domain/protocols/user'
 import { AuthRepository, UserRepository } from '@/data/protocols/user'
-import { UseCaseError } from '@/data/errors'
 import { Hasher } from '@/data/protocols/cryptography'
 import { CpfValidator, EmailValidator } from '@/data/protocols/validator'
+import { errorMessage } from '@/data/errors'
 
 export class AddUserUseCaseImpl implements AddUserUseCase {
   constructor(
@@ -23,29 +23,29 @@ export class AddUserUseCaseImpl implements AddUserUseCase {
     const validEmail = this.emailValidate.isValidEmail(email)
 
     if (!validEmail) {
-      throw new UseCaseError('Informe um email válido')
+      return errorMessage('Email inválido')
     }
 
     const emailExists = await this.authRepository.checkEmailExists(email)
 
     if (emailExists) {
-      throw new UseCaseError('O email já existe')
+      return errorMessage('O email já existe')
     }
 
     const validCPF = this.cpfValidate.isValidCPF(cpf)
 
     if (!validCPF) {
-      throw new UseCaseError('Informe um CPF válido')
+      return errorMessage('CPF inválido')
     }
 
     const cpfExists = await this.authRepository.checkCpfExists(cpf)
 
     if (cpfExists) {
-      throw new UseCaseError('O CPF já existe')
+      return errorMessage('O CPF já existe')
     }
 
     if (password.length < 6) {
-      throw new UseCaseError('A senha tem menos de 6 dígitos')
+      return errorMessage('A senha não pode ter menos de 6 dígitos')
     }
 
     const hashPassword = await this.hasher.hash(password)

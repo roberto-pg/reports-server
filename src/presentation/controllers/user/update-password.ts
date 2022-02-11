@@ -1,7 +1,7 @@
 import { Controller, HttpResponse } from '@/presentation/protocols'
 import { UpdatePasswordUseCase } from '@/domain/protocols/user'
 import { serverSuccess, serverError } from '@/presentation/helpers'
-import { CustomError } from '@/presentation/errors'
+import { errorMessage } from '@/data/errors'
 
 type UpdatePasswordRequest = {
   id: string
@@ -15,15 +15,15 @@ export class UpdatePasswordController implements Controller {
   async handle(request: UpdatePasswordRequest): Promise<HttpResponse<string>> {
     try {
       if (!request.id) {
-        throw new CustomError('Informe o ID do usuário')
+        return errorMessage('Informe o ID do usuário')
       }
 
       if (!request.oldPassword) {
-        throw new CustomError('Informe a senha atual')
+        return errorMessage('Informe a senha atual')
       }
 
       if (!request.newPassword) {
-        throw new CustomError('Informe a nova senha')
+        return errorMessage('Informe a nova senha')
       }
 
       const result = await this.updateUseCase.update(

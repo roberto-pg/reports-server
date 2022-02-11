@@ -2,7 +2,7 @@ import { Controller, HttpResponse } from '@/presentation/protocols'
 import { UserViewModel } from '@/presentation/view-models'
 import { AddUserUseCase } from '@/domain/protocols/user'
 import { serverError, serverSuccess } from '@/presentation/helpers'
-import { CustomError } from '@/presentation/errors'
+import { errorMessage } from '@/data/errors'
 
 type AddUserRequest = {
   name: string
@@ -17,19 +17,19 @@ export class AddUserController implements Controller {
   async handle(request: AddUserRequest): Promise<HttpResponse<UserViewModel>> {
     try {
       if (!request.name) {
-        throw new CustomError('Informe o nome')
+        return errorMessage('Informe o nome')
       }
 
       if (!request.email) {
-        throw new CustomError('Informe o email')
+        return errorMessage('Informe o email')
       }
 
       if (!request.cpf) {
-        throw new CustomError('Informe o CPF')
+        return errorMessage('Informe o CPF')
       }
 
       if (!request.password) {
-        throw new CustomError('Informe a senha')
+        return errorMessage('Informe a senha')
       }
 
       const user = await this.addUser.add(

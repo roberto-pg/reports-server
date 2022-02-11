@@ -1,7 +1,7 @@
 import { UpdatePasswordUseCase } from '@/domain/protocols/user'
 import { AuthRepository, UserRepository } from '@/data/protocols/user'
 import { HashComparer, Hasher } from '@/data/protocols/cryptography'
-import { UseCaseError } from '@/data/errors'
+import { errorMessage } from '@/data/errors'
 
 export class UpdatePasswordUseCaseImpl implements UpdatePasswordUseCase {
   constructor(
@@ -17,7 +17,7 @@ export class UpdatePasswordUseCaseImpl implements UpdatePasswordUseCase {
     newPassword: string
   ): Promise<string> {
     if (newPassword.length < 6) {
-      throw new UseCaseError('A nova senha tem menos de 6 dígitos')
+      return errorMessage('A senha não pode ter menos de 6 dígitos')
     }
 
     const dbPassword = await this.authRepository.loadPasswordById(id)
@@ -28,7 +28,7 @@ export class UpdatePasswordUseCaseImpl implements UpdatePasswordUseCase {
     )
 
     if (!passwordCheck) {
-      throw new UseCaseError('A senha atual está incorreta')
+      return errorMessage('Senha atual não confere')
     }
 
     const hashPassword = await this.hasher.hash(newPassword)

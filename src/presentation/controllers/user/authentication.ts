@@ -2,7 +2,7 @@ import { AuthenticationUseCase } from '@/domain/protocols/user'
 import { Controller, HttpResponse } from '@/presentation/protocols'
 import { UserViewModel } from '@/presentation/view-models'
 import { serverSuccess, serverError } from '@/presentation/helpers'
-import { CustomError } from '@/presentation/errors'
+import { errorMessage } from '@/data/errors'
 
 type AuthRequest = {
   cpf: string
@@ -15,11 +15,11 @@ export class AuthenticationController implements Controller {
   async handle(request: AuthRequest): Promise<HttpResponse<UserViewModel>> {
     try {
       if (!request.cpf) {
-        throw new CustomError('Informe o CPF')
+        return errorMessage('Informe o CPF')
       }
 
       if (!request.password) {
-        throw new CustomError('Informe a senha')
+        return errorMessage('Informe a senha')
       }
 
       const user = await this.authentication.auth(request.cpf, request.password)

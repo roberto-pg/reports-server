@@ -1,5 +1,4 @@
-// import { UseCaseError } from '@/data/errors'
-import { UseCaseError } from '@/data/errors'
+import { errorMessage } from '@/data/errors'
 import { ReportRepository } from '@/data/protocols/report'
 import { DeleteReportByIdUseCase } from '@/domain/protocols/report'
 import { env } from '@/main/config/env'
@@ -12,7 +11,7 @@ export class DeleteReportByIdUseCaseImpl implements DeleteReportByIdUseCase {
     const report = await this.repository.loadReportById(id)
 
     if (!report) {
-      throw new UseCaseError('Relatório não encontrado')
+      return errorMessage('Relatório não existe')
     }
 
     try {
@@ -28,7 +27,7 @@ export class DeleteReportByIdUseCaseImpl implements DeleteReportByIdUseCase {
 
       return result
     } catch (error) {
-      throw new UseCaseError('Falha para deletar o relatório')
+      return errorMessage('Erro ao excluir relatório')
     }
   }
 }
