@@ -1,5 +1,7 @@
 import { ReportRepository } from '@/data/protocols/report'
 import { UpdateReportUseCase } from '@/domain/protocols/report'
+import { env } from '@/main/config/env'
+import { unlink } from 'fs'
 
 export class UpdateReportUseCaseImpl implements UpdateReportUseCase {
   constructor(private readonly repository: ReportRepository) {}
@@ -11,6 +13,15 @@ export class UpdateReportUseCaseImpl implements UpdateReportUseCase {
     stopedAt: string,
     finished: boolean
   ): Promise<string> {
+    const report = await this.repository.loadReportById(id)
+
+    if (report.finished === true) {
+      const previousFinalImage = report.final_image.split('/')
+      unlink(env.imageStorage + previousFinalImage[3], (error) => {
+        if (error) console.log(error)
+      })
+    }
+
     const result = await this.repository.update(
       id,
       finalDescription,
