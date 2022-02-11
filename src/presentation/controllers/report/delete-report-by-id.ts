@@ -1,4 +1,4 @@
-import { errorMessage } from '@/data/errors'
+import { customException } from '@/data/errors'
 import { DeleteReportByIdUseCaseImpl } from '@/data/usecases/report'
 import { serverError, serverSuccess } from '@/presentation/helpers'
 import { Controller, HttpResponse } from '@/presentation/protocols'
@@ -15,15 +15,15 @@ export class DeleteReportByIdController implements Controller {
   async handle(request: DeleteRequest): Promise<HttpResponse<string>> {
     try {
       if (!request.id) {
-        return errorMessage('Informe o ID do relatório')
+        throw customException('Informe o ID do relatório')
       }
 
       if (!request.initial) {
-        return errorMessage('Informe o título da imagem inicial')
+        throw customException('Informe o título da imagem inicial')
       }
 
       if (!request.final) {
-        return errorMessage('Informe o título da imagem final')
+        throw customException('Informe o título da imagem final')
       }
 
       const result = await this.deleteUseCase.delete(

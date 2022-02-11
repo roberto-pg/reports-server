@@ -1,4 +1,4 @@
-import { errorMessage } from '@/data/errors'
+import { customException } from '@/data/errors'
 import { ReportRepository } from '@/data/protocols/report'
 import { DeleteReportByIdUseCase } from '@/domain/protocols/report'
 import { env } from '@/main/config/env'
@@ -11,7 +11,7 @@ export class DeleteReportByIdUseCaseImpl implements DeleteReportByIdUseCase {
     const report = await this.repository.loadReportById(id)
 
     if (!report) {
-      return errorMessage('Relatório não existe')
+      throw customException('Relatório não existe')
     }
 
     try {
@@ -27,7 +27,7 @@ export class DeleteReportByIdUseCaseImpl implements DeleteReportByIdUseCase {
 
       return result
     } catch (error) {
-      return errorMessage('Erro ao excluir relatório')
+      throw customException('Erro ao excluir relatório')
     }
   }
 }

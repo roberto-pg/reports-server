@@ -1,4 +1,3 @@
-import { errorMessage } from '@/data/errors'
 import { LoadReportByIdUseCase } from '@/domain/protocols/report'
 import { serverError, serverSuccess } from '@/presentation/helpers'
 import { Controller, HttpResponse } from '@/presentation/protocols'
@@ -13,10 +12,6 @@ export class LoadReportByIdController implements Controller {
 
   async handle(request: ReportById): Promise<HttpResponse<ReportViewModel>> {
     try {
-      if (!request.reportId) {
-        return errorMessage('Informe o ID do relatório')
-      }
-
       const result = await this.reportByIdUseCase.load(request.reportId)
       return serverSuccess(result)
     } catch (error) {
