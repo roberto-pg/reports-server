@@ -5,7 +5,7 @@ import {
   addReportController,
   loadReportByIdController,
   loadReportsByUserController,
-  loadReportsFinishedController,
+  loadReportsByFinishedController,
   updateReportController,
   deleteReportByIdController
 } from '@/main/factories/report'
@@ -40,9 +40,9 @@ export default (router: Router): void => {
   )
 
   router.get(
-    '/finished-reports',
+    '/reports-by-finished',
     protectedRoute,
-    adaptRoute(loadReportsFinishedController())
+    adaptRoute(loadReportsByFinishedController())
   )
 
   router.delete(

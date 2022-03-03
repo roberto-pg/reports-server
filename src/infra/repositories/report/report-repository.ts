@@ -64,7 +64,7 @@ export class ReportRepositoryImpl implements ReportRepository {
     return report
   }
 
-  async loadReportsFinished(
+  async loadReportsByFinished(
     userId: string,
     finished: boolean
   ): Promise<ReportModel[]> {

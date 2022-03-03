@@ -1,22 +1,24 @@
-import { LoadReportsFinishedUseCase } from '@/domain/protocols/report'
+import { LoadReportsByFinishedUseCase } from '@/domain/protocols/report'
 import { serverError, serverSuccess } from '@/presentation/helpers'
 import { Controller, HttpResponse } from '@/presentation/protocols'
 import { ReportViewModel } from '@/presentation/view-models'
 
 type FinishedReports = {
   userId: string
+  finished: boolean
 }
 
-export class LoadReportsFinishedController implements Controller {
-  constructor(private readonly finishedUseCase: LoadReportsFinishedUseCase) {}
+export class LoadReportsByFinishedController implements Controller {
+  constructor(private readonly finishedUseCase: LoadReportsByFinishedUseCase) {}
 
   async handle(
     request: FinishedReports
   ): Promise<HttpResponse<ReportViewModel[]>> {
     try {
-      const finished = true
-
-      const reports = await this.finishedUseCase.load(request.userId, finished)
+      const reports = await this.finishedUseCase.load(
+        request.userId,
+        request.finished
+      )
       return serverSuccess(ReportViewModel.mapCollection(reports))
     } catch (error) {
       return serverError(error)

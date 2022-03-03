@@ -16,7 +16,7 @@ export interface ReportRepository {
     finished: boolean
   ) => Promise<string>
   loadReportById: (reportId: string) => Promise<ReportModel>
-  loadReportsFinished: (
+  loadReportsByFinished: (
     userId: string,
     finished: boolean
   ) => Promise<ReportModel[]>
