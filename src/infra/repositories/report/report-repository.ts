@@ -66,12 +66,12 @@ export class ReportRepositoryImpl implements ReportRepository {
 
   async loadReportsByFinished(
     userId: string,
-    finished: boolean
+    finished: string
   ): Promise<ReportModel[]> {
     const reports = await this.prismaServer.connectPrisma().report.findMany({
       where: {
         user_id: userId,
-        finished
+        finished: finished === 'true'
       }
     })
 

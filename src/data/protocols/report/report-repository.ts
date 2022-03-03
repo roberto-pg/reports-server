@@ -18,7 +18,7 @@ export interface ReportRepository {
   loadReportById: (reportId: string) => Promise<ReportModel>
   loadReportsByFinished: (
     userId: string,
-    finished: boolean
+    finished: string
   ) => Promise<ReportModel[]>
   deleteReportById: (
     id: string,

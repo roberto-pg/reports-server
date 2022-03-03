@@ -7,7 +7,7 @@ export class LoadReportsByFinishedUseCaseImpl
 {
   constructor(private readonly repository: ReportRepository) {}
 
-  async load(userId: string, finished: boolean): Promise<ReportModel[]> {
+  async load(userId: string, finished: string): Promise<ReportModel[]> {
     const reports = await this.repository.loadReportsByFinished(
       userId,
       finished

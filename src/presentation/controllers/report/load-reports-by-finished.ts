@@ -5,7 +5,7 @@ import { ReportViewModel } from '@/presentation/view-models'
 
 type FinishedReports = {
   userId: string
-  finished: boolean
+  finished: string
 }
 
 export class LoadReportsByFinishedController implements Controller {

@@ -40,7 +40,7 @@ export default (router: Router): void => {
   )
 
   router.get(
-    '/reports-by-finished',
+    '/reports-by-finished/:finished',
     protectedRoute,
     adaptRoute(loadReportsByFinishedController())
   )
