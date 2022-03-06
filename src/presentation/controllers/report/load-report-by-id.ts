@@ -13,7 +13,7 @@ export class LoadReportByIdController implements Controller {
   async handle(request: ReportById): Promise<HttpResponse<ReportViewModel>> {
     try {
       const result = await this.reportByIdUseCase.load(request.reportId)
-      return serverSuccess(result)
+      return serverSuccess(ReportViewModel.map(result))
     } catch (error) {
       return serverError(error)
     }
