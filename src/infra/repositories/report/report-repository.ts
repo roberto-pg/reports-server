@@ -26,7 +26,8 @@ export class ReportRepositoryImpl implements ReportRepository {
   async loadReports(userId: string): Promise<ReportModel[]> {
     const reports = await this.prismaServer.connectPrisma().report.findMany({
       where: {
-        user_id: userId
+        user_id: userId,
+        finished: true
       }
     })
     return reports
