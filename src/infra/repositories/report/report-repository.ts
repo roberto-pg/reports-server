@@ -44,7 +44,7 @@ export class ReportRepositoryImpl implements ReportRepository {
       data: {
         final_description: finalDescription,
         final_image: finalImage,
-        stoped_at: stopedAt,
+        stoped_at: new Date(stopedAt),
         finished: finished
       },
       where: {
