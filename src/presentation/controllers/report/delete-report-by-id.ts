@@ -22,10 +22,6 @@ export class DeleteReportByIdController implements Controller {
         throw customException('Informe o título da imagem inicial')
       }
 
-      if (!request.final) {
-        throw customException('Informe o título da imagem final')
-      }
-
       const result = await this.deleteUseCase.delete(
         request.id,
         request.initial,
