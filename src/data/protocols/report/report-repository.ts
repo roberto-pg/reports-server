@@ -20,9 +20,5 @@ export interface ReportRepository {
     userId: string,
     finished: string
   ) => Promise<ReportModel[]>
-  deleteReportById: (
-    id: string,
-    initial: string,
-    final: string
-  ) => Promise<string>
+  deleteReportById: (id: string) => Promise<string>
 }

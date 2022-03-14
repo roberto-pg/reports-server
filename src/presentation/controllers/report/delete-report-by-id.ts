@@ -5,8 +5,8 @@ import { Controller, HttpResponse } from '@/presentation/protocols'
 
 type DeleteRequest = {
   id: string
-  initial: string
-  final: string
+  initialImage: string
+  finalImage: string
 }
 
 export class DeleteReportByIdController implements Controller {
@@ -18,14 +18,14 @@ export class DeleteReportByIdController implements Controller {
         throw customException('Informe o ID do relatório')
       }
 
-      if (!request.initial) {
+      if (!request.initialImage) {
         throw customException('Informe o título da imagem inicial')
       }
 
       const result = await this.deleteUseCase.delete(
         request.id,
-        request.initial,
-        request.final
+        request.initialImage,
+        request.finalImage
       )
       return serverSuccess(result)
     } catch (error) {

@@ -7,7 +7,11 @@ import { unlink } from 'fs'
 export class DeleteReportByIdUseCaseImpl implements DeleteReportByIdUseCase {
   constructor(private readonly repository: ReportRepository) {}
 
-  async delete(id: string, initial: string, final: string): Promise<string> {
+  async delete(
+    id: string,
+    initialImage: string,
+    finalImage: string
+  ): Promise<string> {
     const report = await this.repository.loadReportById(id)
 
     if (!report) {
@@ -15,13 +19,13 @@ export class DeleteReportByIdUseCaseImpl implements DeleteReportByIdUseCase {
     }
 
     try {
-      const result = await this.repository.deleteReportById(id, initial, final)
+      const result = await this.repository.deleteReportById(id)
 
-      unlink(env.imageStorage + initial, (error) => {
+      unlink(env.imageStorage + initialImage, (error) => {
         if (error) console.log(error)
       })
 
-      unlink(env.imageStorage + final, (error) => {
+      unlink(env.imageStorage + finalImage, (error) => {
         if (error) console.log(error)
       })
 

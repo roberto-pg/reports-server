@@ -1,3 +1,7 @@
 export interface DeleteReportByIdUseCase {
-  delete: (id: string, initial: string, final: string) => Promise<string>
+  delete: (
+    id: string,
+    initialImage: string,
+    finalImage: string
+  ) => Promise<string>
 }
