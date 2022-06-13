@@ -17,7 +17,7 @@ export class UpdateReportUseCaseImpl implements UpdateReportUseCase {
 
     if (report.finished === true) {
       const previousFinalImage = report.final_image.split('/')
-      unlink(env.imageStorage + previousFinalImage[3], (error) => {
+      unlink(env.imageStorage + previousFinalImage[4], (error) => {
         if (error) console.log(error)
       })
     }

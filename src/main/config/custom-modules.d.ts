@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-declare module Express {
+declare namespace Express {
   interface Request {
     userId?: string
   }

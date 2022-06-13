@@ -14,7 +14,7 @@ export class ReportViewModel {
         entity.stoped_at !== null
           ? entity.stoped_at.toISOString()
           : entity.stoped_at,
-      finished: entity.finished
+      finished: entity.finished,
     }
   }
 

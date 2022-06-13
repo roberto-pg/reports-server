@@ -2,7 +2,7 @@ import { AddUserUseCaseImpl } from '@/data/usecases/user'
 import { PrismaServer } from '@/infra/db/postgres'
 import {
   AuthRepositoryImpl,
-  UserRepositoryImpl
+  UserRepositoryImpl,
 } from '@/infra/repositories/user'
 import { Controller } from '@/presentation/protocols'
 import { AddUserController } from '@/presentation/controllers/user'

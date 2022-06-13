@@ -21,11 +21,11 @@ export class DeleteReportByIdUseCaseImpl implements DeleteReportByIdUseCase {
     try {
       const result = await this.repository.deleteReportById(id)
 
-      unlink(env.imageStorage + initialImage, (error) => {
+      unlink(env.imageStorage + '/' + initialImage, (error) => {
         if (error) console.log(error)
       })
 
-      unlink(env.imageStorage + finalImage, (error) => {
+      unlink(env.imageStorage + '/' + finalImage, (error) => {
         if (error) console.log(error)
       })
 

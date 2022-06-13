@@ -16,8 +16,8 @@ export class ReportRepositoryImpl implements ReportRepository {
         user_id: userId,
         initial_description: initialDescription,
         initial_image: initialImage,
-        started_at: new Date(startedAt)
-      }
+        started_at: new Date(startedAt),
+      },
     })
 
     return report
@@ -27,8 +27,8 @@ export class ReportRepositoryImpl implements ReportRepository {
     const reports = await this.prismaServer.connectPrisma().report.findMany({
       where: {
         user_id: userId,
-        finished: true
-      }
+        finished: true,
+      },
     })
     return reports
   }
@@ -45,11 +45,11 @@ export class ReportRepositoryImpl implements ReportRepository {
         final_description: finalDescription,
         final_image: finalImage,
         stoped_at: new Date(stopedAt),
-        finished: finished
+        finished: finished,
       },
       where: {
-        id
-      }
+        id,
+      },
     })
 
     return report.id
@@ -58,8 +58,8 @@ export class ReportRepositoryImpl implements ReportRepository {
   async loadReportById(reportId: string): Promise<ReportModel> {
     const report = await this.prismaServer.connectPrisma().report.findUnique({
       where: {
-        id: reportId
-      }
+        id: reportId,
+      },
     })
 
     return report
@@ -72,8 +72,8 @@ export class ReportRepositoryImpl implements ReportRepository {
     const reports = await this.prismaServer.connectPrisma().report.findMany({
       where: {
         user_id: userId,
-        finished: finished === 'true'
-      }
+        finished: finished === 'true',
+      },
     })
 
     return reports
@@ -82,8 +82,8 @@ export class ReportRepositoryImpl implements ReportRepository {
   async deleteReportById(id: string): Promise<string> {
     const result = await this.prismaServer.connectPrisma().report.delete({
       where: {
-        id
-      }
+        id,
+      },
     })
 
     return result.id

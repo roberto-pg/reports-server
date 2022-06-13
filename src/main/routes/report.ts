@@ -7,9 +7,10 @@ import {
   loadReportsByUserController,
   loadReportsByFinishedController,
   updateReportController,
-  deleteReportByIdController
+  deleteReportByIdController,
 } from '@/main/factories/report'
 import multer from 'multer'
+// eslint-disable-next-line @typescript-eslint/no-var-requires
 const multerConfig = require('../middlewares/multer')
 
 export default (router: Router): void => {

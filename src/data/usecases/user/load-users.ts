@@ -14,7 +14,7 @@ export class LoadUsersUseCaseImpl implements LoadUsersUseCase {
         name: user.name,
         email: user.email,
         cpf: user.cpf,
-        password: undefined
+        password: undefined,
       }
     })
 

@@ -1,7 +1,7 @@
 import { CpfValidator } from '@/data/protocols/validator'
 
 export class CpfValidatorImpl implements CpfValidator {
-  isValidCPF(cpf: string): Boolean {
+  isValidCPF(cpf: string): boolean {
     let soma = 0
     let resto = 0
     let i = 0

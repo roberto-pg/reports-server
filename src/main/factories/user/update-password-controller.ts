@@ -3,7 +3,7 @@ import { Controller } from '@/presentation/protocols'
 import { UpdatePasswordUseCaseImpl } from '@/data/usecases/user'
 import {
   AuthRepositoryImpl,
-  UserRepositoryImpl
+  UserRepositoryImpl,
 } from '@/infra/repositories/user'
 import { PrismaServer } from '@/infra/db/postgres'
 import { BcryptAdapter } from '@/infra/cryptography'

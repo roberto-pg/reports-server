@@ -1,3 +1,3 @@
 export interface CpfValidator {
-  isValidCPF: (cpf: string) => Boolean
+  isValidCPF: (cpf: string) => boolean
 }

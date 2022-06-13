@@ -50,8 +50,7 @@ export class AuthenticationUseCaseImpl implements AuthenticationUseCase {
       name: user.name,
       email: user.email,
       cpf: user.cpf,
-      password: undefined,
-      token: token
+      token: token,
     }
 
     return serializedUser

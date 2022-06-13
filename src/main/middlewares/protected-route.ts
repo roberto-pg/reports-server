@@ -16,7 +16,7 @@ export async function protectedRoute(
 
   if (!authToken) {
     return response.status(401).json({
-      errorCode: 'Um token é requerido'
+      errorCode: 'Um token é requerido',
     })
   }
 

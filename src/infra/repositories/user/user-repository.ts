@@ -16,8 +16,8 @@ export class UserRepositoryImpl implements UserRepository {
         name,
         email,
         cpf,
-        password
-      }
+        password,
+      },
     })
 
     return user
@@ -31,8 +31,8 @@ export class UserRepositoryImpl implements UserRepository {
   async loadUserById(userId: string): Promise<UserModel> {
     const user = await this.prismaServer.connectPrisma().user.findUnique({
       where: {
-        id: userId
-      }
+        id: userId,
+      },
     })
 
     return user
@@ -41,11 +41,11 @@ export class UserRepositoryImpl implements UserRepository {
   async updatePassword(id: string, newPassword: string): Promise<string> {
     const user = await this.prismaServer.connectPrisma().user.update({
       where: {
-        id
+        id,
       },
       data: {
-        password: newPassword
-      }
+        password: newPassword,
+      },
     })
 
     return user.id
@@ -54,8 +54,8 @@ export class UserRepositoryImpl implements UserRepository {
   async deleteUserById(id: string): Promise<string> {
     const user = await this.prismaServer.connectPrisma().user.delete({
       where: {
-        id
-      }
+        id,
+      },
     })
 
     return user.id

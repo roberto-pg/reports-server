@@ -6,7 +6,7 @@ import {
   loadUserByIdController,
   deleteUserByIdController,
   updatePasswordController,
-  logoutController
+  logoutController,
 } from '@/main/factories/user'
 import { adaptRoute } from '@/main/adapters'
 import { protectedRoute } from '@/main/middlewares'

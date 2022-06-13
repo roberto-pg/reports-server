@@ -9,7 +9,7 @@ interface TokenUser {
 export class JwtAdapter implements Encrypter, Decrypter {
   async encrypt(plainText: string): Promise<string> {
     const token = sign({ userId: plainText }, env.secretKey, {
-      expiresIn: parseInt(env.expirationTime)
+      expiresIn: parseInt(env.expirationTime),
     })
     return token
   }

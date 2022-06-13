@@ -26,7 +26,7 @@ export class UpdateReportController implements Controller {
       )
       return serverSuccess(result)
     } catch (error) {
-      serverError(error)
+      return serverError(error)
     }
   }
 }

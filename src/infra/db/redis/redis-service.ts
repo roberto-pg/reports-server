@@ -1,4 +1,5 @@
 import { env } from '@/main/config/env'
+// eslint-disable-next-line @typescript-eslint/no-var-requires
 const Redis = require('./redis-connection').redisClient
 
 Redis.on('connect', () => {

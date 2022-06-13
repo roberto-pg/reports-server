@@ -1,3 +1,3 @@
 export interface HashComparer {
-  compare: (password: string, dbPassword: string) => Promise<Boolean>
+  compare: (password: string, dbPassword: string) => Promise<boolean>
 }
