@@ -15,7 +15,7 @@ export interface ReportRepository {
     stopedAt: string,
     finished: boolean
   ) => Promise<string>
-  loadReportById: (reportId: string) => Promise<ReportModel>
+  loadReportById: (reportId: string) => Promise<ReportModel | null>
   loadReportsByFinished: (
     userId: string,
     finished: string

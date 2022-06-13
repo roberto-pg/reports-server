@@ -8,7 +8,7 @@ export interface UserRepository {
     password: string
   ) => Promise<UserModel>
   loadUsers: () => Promise<UserModel[]>
-  loadUserById: (userId: string) => Promise<UserModel>
+  loadUserById: (userId: string) => Promise<UserModel | null>
   deleteUserById: (id: string) => Promise<string>
   updatePassword: (id: string, newPassword: string) => Promise<string>
 }

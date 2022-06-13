@@ -12,7 +12,7 @@ export class ReportViewModel {
       finalImage: entity.final_image,
       stopedAt:
         entity.stoped_at !== null
-          ? entity.stoped_at.toISOString()
+          ? entity.stoped_at?.toISOString()
           : entity.stoped_at,
       finished: entity.finished,
     }

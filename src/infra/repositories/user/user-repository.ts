@@ -28,7 +28,7 @@ export class UserRepositoryImpl implements UserRepository {
     return users
   }
 
-  async loadUserById(userId: string): Promise<UserModel> {
+  async loadUserById(userId: string): Promise<UserModel | null> {
     const user = await this.prismaServer.connectPrisma().user.findUnique({
       where: {
         id: userId,

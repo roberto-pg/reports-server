@@ -15,11 +15,12 @@ export class UpdateReportUseCaseImpl implements UpdateReportUseCase {
   ): Promise<string> {
     const report = await this.repository.loadReportById(id)
 
-    if (report.finished === true) {
-      const previousFinalImage = report.final_image.split('/')
-      unlink(env.imageStorage + previousFinalImage[4], (error) => {
-        if (error) console.log(error)
-      })
+    if (report?.finished === true) {
+      const previousFinalImage = report?.final_image?.split('/')
+      if (previousFinalImage)
+        unlink(env.imageStorage + previousFinalImage[4], (error) => {
+          if (error) console.log(error)
+        })
     }
 
     const result = await this.repository.update(

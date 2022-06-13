@@ -5,7 +5,7 @@ import { HttpService } from '@/infra/protocols'
 export class AuthRepositoryImpl implements AuthRepository {
   constructor(private readonly prismaServer: HttpService) {}
 
-  async authenticateUser(cpf: string): Promise<UserModel> {
+  async authenticateUser(cpf: string): Promise<UserModel | null> {
     const user = await this.prismaServer.connectPrisma().user.findUnique({
       where: {
         cpf,
@@ -50,7 +50,7 @@ export class AuthRepositoryImpl implements AuthRepository {
         password: true,
       },
     })
-    return user.password
+    return user?.password ?? ''
   }
 
   async loadPasswordById(id: string): Promise<string> {
@@ -62,6 +62,6 @@ export class AuthRepositoryImpl implements AuthRepository {
         password: true,
       },
     })
-    return user.password
+    return user?.password ?? ''
   }
 }

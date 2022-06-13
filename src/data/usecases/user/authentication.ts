@@ -41,16 +41,16 @@ export class AuthenticationUseCaseImpl implements AuthenticationUseCase {
 
     const user = await this.authRepository.authenticateUser(cpf)
 
-    const token = await this.encrypter.encrypt(user.id)
+    const token = await this.encrypter.encrypt(user?.id ?? '')
 
-    setUserCache(user.id)
+    setUserCache(user?.id ?? '')
 
     const serializedUser = {
-      id: user.id,
-      name: user.name,
-      email: user.email,
-      cpf: user.cpf,
-      token: token,
+      id: user?.id ?? '',
+      name: user?.name ?? '',
+      email: user?.email ?? '',
+      cpf: user?.cpf ?? '',
+      token: token ?? '',
     }
 
     return serializedUser

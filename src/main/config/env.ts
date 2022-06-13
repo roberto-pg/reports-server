@@ -2,8 +2,8 @@ import 'dotenv/config'
 
 export const env = {
   port: process.env.PORT || 5000,
-  secretKey: process.env.JWT_SECRET_KEY,
-  expirationTime: process.env.TOKEN_EXPIRATION_TIME,
+  secretKey: process.env.JWT_SECRET_KEY || '',
+  expirationTime: process.env.TOKEN_EXPIRATION_TIME || '360',
   redisHost: process.env.REDIS_HOST,
   redisPort: process.env.REDIS_PORT,
   redisPass: process.env.REDIS_PASS,

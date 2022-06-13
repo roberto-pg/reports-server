@@ -55,7 +55,7 @@ export class ReportRepositoryImpl implements ReportRepository {
     return report.id
   }
 
-  async loadReportById(reportId: string): Promise<ReportModel> {
+  async loadReportById(reportId: string): Promise<ReportModel | null> {
     const report = await this.prismaServer.connectPrisma().report.findUnique({
       where: {
         id: reportId,
