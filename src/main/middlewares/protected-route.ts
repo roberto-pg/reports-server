@@ -29,7 +29,7 @@ export async function protectedRoute(
   }
 
   try {
-    const { userId } = verify(token, env.secretKey) as IPayload
+    const { userId } = verify(token, env.secretKey ?? '') as IPayload
     request.userId = userId
 
     return next()
