@@ -27,7 +27,7 @@ services:
     working_dir: /usr/app
     volumes:
       - .:/usr/app
-      - /home/rpg/docker/nginx/report:/usr/app/public/images
+      - /home/rpg/docker/nginx/reports:/usr/app/public/images
     command: sh -c "yarn && yarn build && yarn start"
     restart: always
     networks:
