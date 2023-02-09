@@ -11,7 +11,7 @@
   "dependencies": {
     "@prisma/client": "^3.8.1",
     "bcryptjs": "^2.4.3",
-    "dotenv": "^13.0.1",
+    "dotenv": "^16.0.3",
     "express": "^4.17.2",
     "ioredis": "^4.28.3",
     "jsonwebtoken": "^8.5.1",
