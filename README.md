@@ -66,7 +66,27 @@ DIR_IMAGE=http://localhost:8080/reports/
 ### This Server uses Nginx to provide static images of the book covers. Install the Nginx container before running docker-compose:
 
 ```
-docker run -d --name nginx -p 8080:80 --restart always -v /home/<user>/docker/nginx/books:/usr/share/nginx/html/books nginx
+docker run -d --name nginx -p 8080:80 --restart always -v /home/<user>/docker/nginx/reports:/usr/share/nginx/html/reports nginx               
+```
+
+<br/>
+
+### Bitnami's Postgres Container requires permission to access the persistence directory. Create the folder and give access permission:
+
+```
+cd ~/docker
+```
+
+```
+sudo mkdir report-postgres
+```
+
+```
+sudo chown -R 1001:1001 /home/rpg/docker/report-postgres
+```
+
+```
+cd ~/reports
 ```
 
 <br/>
