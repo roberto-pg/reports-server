@@ -7,11 +7,7 @@ import { unlink } from 'fs'
 export class DeleteReportByIdUseCaseImpl implements DeleteReportByIdUseCase {
   constructor(private readonly repository: ReportRepository) {}
 
-  async delete(
-    id: string,
-    initialImage: string,
-    finalImage: string
-  ): Promise<string> {
+  async delete(id: string, initialImage: string, finalImage: string): Promise<string> {
     const report = await this.repository.loadReportById(id)
 
     if (!report) {

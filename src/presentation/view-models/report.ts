@@ -10,11 +10,8 @@ export class ReportViewModel {
       startedAt: entity.started_at.toISOString(),
       finalDescription: entity.final_description,
       finalImage: entity.final_image,
-      stopedAt:
-        entity.stoped_at !== null
-          ? entity.stoped_at?.toISOString()
-          : entity.stoped_at,
-      finished: entity.finished,
+      stopedAt: entity.stoped_at !== null ? entity.stoped_at?.toISOString() : entity.stoped_at,
+      finished: entity.finished
     }
   }
 

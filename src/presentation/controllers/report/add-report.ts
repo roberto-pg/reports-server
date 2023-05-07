@@ -14,9 +14,7 @@ type AddReportRequest = {
 export class AddReportController implements Controller {
   constructor(private readonly addReport: AddReportUseCase) {}
 
-  async handle(
-    request: AddReportRequest
-  ): Promise<HttpResponse<ReportViewModel>> {
+  async handle(request: AddReportRequest): Promise<HttpResponse<ReportViewModel>> {
     const initialImage = env.dirImage + request.imageUrl
     try {
       const report = await this.addReport.add(

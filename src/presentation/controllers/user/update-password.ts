@@ -26,11 +26,7 @@ export class UpdatePasswordController implements Controller {
         throw customException('Informe a nova senha')
       }
 
-      const result = await this.updateUseCase.update(
-        request.id,
-        request.oldPassword,
-        request.newPassword
-      )
+      const result = await this.updateUseCase.update(request.id, request.oldPassword, request.newPassword)
       return serverSuccess(result)
     } catch (error) {
       return serverError(error)

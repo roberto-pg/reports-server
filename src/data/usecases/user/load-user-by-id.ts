@@ -12,7 +12,7 @@ export class LoadUserByIdUseCaseImpl implements LoadUserByIdUseCase {
       id: user?.id ?? undefined,
       name: user?.name ?? '',
       email: user?.email ?? '',
-      cpf: user?.cpf ?? '',
+      cpf: user?.cpf ?? ''
     }
 
     return serializedUser

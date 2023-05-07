@@ -10,9 +10,7 @@ type ReportsByUser = {
 export class LoadReportsByUserController implements Controller {
   constructor(private readonly loadUseCase: LoadReportsByUserUseCase) {}
 
-  async handle(
-    request: ReportsByUser
-  ): Promise<HttpResponse<ReportViewModel[]>> {
+  async handle(request: ReportsByUser): Promise<HttpResponse<ReportViewModel[]>> {
     try {
       const reports = await this.loadUseCase.load(request.userId)
       return serverSuccess(ReportViewModel.mapCollection(reports))

@@ -1,10 +1,7 @@
 import { Controller } from '@/presentation/protocols'
 import { AuthenticationController } from '@/presentation/controllers/user'
 import { AuthenticationUseCaseImpl } from '@/data/usecases/user'
-import {
-  AuthRepositoryImpl,
-  UserRepositoryImpl
-} from '@/infra/repositories/user'
+import { AuthRepositoryImpl, UserRepositoryImpl } from '@/infra/repositories/user'
 import { PrismaServer } from '@/infra/db/postgres'
 import { CpfValidatorImpl } from '@/validation/validators'
 import { BcryptAdapter, JwtAdapter } from '@/infra/cryptography'

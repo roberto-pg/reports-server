@@ -8,8 +8,8 @@ export class AuthRepositoryImpl implements AuthRepository {
   async authenticateUser(cpf: string): Promise<UserModel | null> {
     const user = await this.prismaServer.connectPrisma().user.findUnique({
       where: {
-        cpf,
-      },
+        cpf
+      }
     })
 
     return user
@@ -18,8 +18,8 @@ export class AuthRepositoryImpl implements AuthRepository {
   async checkCpfExists(cpf: string): Promise<boolean> {
     const user = await this.prismaServer.connectPrisma().user.findUnique({
       where: {
-        cpf: cpf,
-      },
+        cpf: cpf
+      }
     })
     if (user) {
       return true
@@ -31,8 +31,8 @@ export class AuthRepositoryImpl implements AuthRepository {
   async checkEmailExists(email: string): Promise<boolean> {
     const user = await this.prismaServer.connectPrisma().user.findUnique({
       where: {
-        email: email,
-      },
+        email: email
+      }
     })
     if (user) {
       return true
@@ -44,11 +44,11 @@ export class AuthRepositoryImpl implements AuthRepository {
   async loadPassword(cpf: string): Promise<string> {
     const user = await this.prismaServer.connectPrisma().user.findUnique({
       where: {
-        cpf: cpf,
+        cpf: cpf
       },
       select: {
-        password: true,
-      },
+        password: true
+      }
     })
     return user?.password ?? ''
   }
@@ -56,11 +56,11 @@ export class AuthRepositoryImpl implements AuthRepository {
   async loadPasswordById(id: string): Promise<string> {
     const user = await this.prismaServer.connectPrisma().user.findUnique({
       where: {
-        id: id,
+        id: id
       },
       select: {
-        password: true,
-      },
+        password: true
+      }
     })
     return user?.password ?? ''
   }

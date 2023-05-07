@@ -14,12 +14,7 @@ export class AddUserUseCaseImpl implements AddUserUseCase {
     private readonly hasher: Hasher
   ) {}
 
-  async add(
-    name: string,
-    email: string,
-    cpf: string,
-    password: string
-  ): Promise<User> {
+  async add(name: string, email: string, cpf: string, password: string): Promise<User> {
     const validEmail = this.emailValidate.isValidEmail(email)
 
     if (!validEmail) {
@@ -50,12 +45,7 @@ export class AddUserUseCaseImpl implements AddUserUseCase {
 
     const hashPassword = await this.hasher.hash(password)
 
-    const user = await this.userRepository.addUser(
-      name,
-      email,
-      cpf,
-      hashPassword
-    )
+    const user = await this.userRepository.addUser(name, email, cpf, hashPassword)
 
     user.password = undefined
 

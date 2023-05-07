@@ -9,6 +9,7 @@ type UserIdRequest = {
 export class LoadUserByIdController implements Controller {
   constructor(private readonly userIdUseCase: LoadUserByIdUseCase) {}
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   async handle(request: UserIdRequest): Promise<HttpResponse<any>> {
     try {
       const user = await this.userIdUseCase.load(request.userId)

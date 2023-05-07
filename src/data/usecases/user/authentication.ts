@@ -30,10 +30,7 @@ export class AuthenticationUseCaseImpl implements AuthenticationUseCase {
 
     const dbPassword = await this.authRepository.loadPassword(cpf)
 
-    const passwordCheck = await this.passwordCompare.compare(
-      password,
-      dbPassword
-    )
+    const passwordCheck = await this.passwordCompare.compare(password, dbPassword)
 
     if (!passwordCheck) {
       throw customException('Senha inválida')
@@ -50,7 +47,7 @@ export class AuthenticationUseCaseImpl implements AuthenticationUseCase {
       name: user?.name ?? '',
       email: user?.email ?? '',
       cpf: user?.cpf ?? '',
-      token: token ?? '',
+      token: token ?? ''
     }
 
     return serializedUser

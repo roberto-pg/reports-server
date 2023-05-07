@@ -8,7 +8,7 @@ export const adaptRoute = (controller: Controller) => {
       ...(request.params || {}),
       userId: request.userId,
       token: request.headers.authorization,
-      imageUrl: request.file ? request.file.filename : {},
+      imageUrl: request.file ? request.file.filename : {}
     }
 
     const httpResponse = await controller.handle(requestBody)

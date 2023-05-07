@@ -6,7 +6,7 @@ import {
   loadUserByIdController,
   deleteUserByIdController,
   updatePasswordController,
-  logoutController,
+  logoutController
 } from '@/main/factories/user'
 import { adaptRoute } from '@/main/adapters'
 import { protectedRoute } from '@/main/middlewares'
@@ -15,20 +15,8 @@ export default (router: Router): void => {
   router.post('/create-user', adaptRoute(addUserController()))
   router.post('/auth-user', adaptRoute(authenticationController()))
   router.get('/users', protectedRoute, adaptRoute(loadUsersController()))
-  router.get(
-    '/user-by-id',
-    protectedRoute,
-    adaptRoute(loadUserByIdController())
-  )
-  router.delete(
-    '/delete-user/:id',
-    protectedRoute,
-    adaptRoute(deleteUserByIdController())
-  )
-  router.patch(
-    '/change-password',
-    protectedRoute,
-    adaptRoute(updatePasswordController())
-  )
+  router.get('/user-by-id', protectedRoute, adaptRoute(loadUserByIdController()))
+  router.delete('/delete-user/:id', protectedRoute, adaptRoute(deleteUserByIdController()))
+  router.patch('/change-password', protectedRoute, adaptRoute(updatePasswordController()))
   router.post('/logout', protectedRoute, adaptRoute(logoutController()))
 }

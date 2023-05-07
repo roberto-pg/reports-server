@@ -7,7 +7,7 @@ import {
   loadReportsByUserController,
   loadReportsByFinishedController,
   updateReportController,
-  deleteReportByIdController,
+  deleteReportByIdController
 } from '@/main/factories/report'
 import multer from 'multer'
 // eslint-disable-next-line @typescript-eslint/no-var-requires
@@ -21,11 +21,7 @@ export default (router: Router): void => {
     adaptRoute(addReportController())
   )
 
-  router.get(
-    '/all-reports-by-user',
-    protectedRoute,
-    adaptRoute(loadReportsByUserController())
-  )
+  router.get('/all-reports-by-user', protectedRoute, adaptRoute(loadReportsByUserController()))
 
   router.patch(
     '/close-report/:id',
@@ -34,21 +30,9 @@ export default (router: Router): void => {
     adaptRoute(updateReportController())
   )
 
-  router.get(
-    '/report-by-id/:reportId',
-    protectedRoute,
-    adaptRoute(loadReportByIdController())
-  )
+  router.get('/report-by-id/:reportId', protectedRoute, adaptRoute(loadReportByIdController()))
 
-  router.get(
-    '/reports-by-finished/:finished',
-    protectedRoute,
-    adaptRoute(loadReportsByFinishedController())
-  )
+  router.get('/reports-by-finished/:finished', protectedRoute, adaptRoute(loadReportsByFinishedController()))
 
-  router.delete(
-    '/delete-report',
-    protectedRoute,
-    adaptRoute(deleteReportByIdController())
-  )
+  router.delete('/delete-report', protectedRoute, adaptRoute(deleteReportByIdController()))
 }

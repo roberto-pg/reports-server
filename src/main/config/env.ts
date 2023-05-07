@@ -8,5 +8,5 @@ export const env = {
   redisPort: process.env.REDIS_PORT,
   redisPass: process.env.REDIS_PASS,
   dirImage: process.env.DIR_IMAGE,
-  imageStorage: process.env.IMAGE_STORAGE,
+  imageStorage: process.env.IMAGE_STORAGE
 }

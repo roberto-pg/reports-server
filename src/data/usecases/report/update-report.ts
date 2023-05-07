@@ -23,13 +23,7 @@ export class UpdateReportUseCaseImpl implements UpdateReportUseCase {
         })
     }
 
-    const result = await this.repository.update(
-      id,
-      finalDescription,
-      finalImage,
-      stopedAt,
-      finished
-    )
+    const result = await this.repository.update(id, finalDescription, finalImage, stopedAt, finished)
     return result
   }
 }

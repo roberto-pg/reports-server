@@ -11,11 +11,7 @@ export class UpdatePasswordUseCaseImpl implements UpdatePasswordUseCase {
     private readonly hasher: Hasher
   ) {}
 
-  async update(
-    id: string,
-    oldPassword: string,
-    newPassword: string
-  ): Promise<string> {
+  async update(id: string, oldPassword: string, newPassword: string): Promise<string> {
     const user = await this.userRepository.loadUserById(id)
 
     if (!user) {
@@ -24,10 +20,7 @@ export class UpdatePasswordUseCaseImpl implements UpdatePasswordUseCase {
 
     const dbPassword = await this.authRepository.loadPasswordById(id)
 
-    const passwordCheck = await this.passwordCompare.compare(
-      oldPassword,
-      dbPassword
-    )
+    const passwordCheck = await this.passwordCompare.compare(oldPassword, dbPassword)
 
     if (!passwordCheck) {
       throw customException('Senha atual não confere')

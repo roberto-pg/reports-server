@@ -32,12 +32,7 @@ export class AddUserController implements Controller {
         throw customException('Informe a senha')
       }
 
-      const user = await this.addUser.add(
-        request.name,
-        request.email,
-        request.cpf,
-        request.password
-      )
+      const user = await this.addUser.add(request.name, request.email, request.cpf, request.password)
 
       return serverSuccess(user)
     } catch (error) {
