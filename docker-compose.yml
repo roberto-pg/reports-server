@@ -7,7 +7,7 @@ networks:
 services:
   postgres:
     image: bitnami/postgresql:15.2.0@sha256:2647d1d05cd48fa494c39a8d717984a5d77590e08967cb2762a6febe2e428643
-    container_name: report-postgres
+    container_name: report-db
     volumes:
       - /home/rpg/docker/report-postgres:/bitnami/postgresql
     restart: always
