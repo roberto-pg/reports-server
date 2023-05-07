@@ -20,7 +20,7 @@ services:
       - report-net
 
   app:
-    image: node:lts-alpine@sha256:51e341881c2b77e52778921c685e711a186a71b8c6f62ff2edfc6b6950225a2f
+    image: node:current-alpine3.16@sha256:46e58f13212d735aec984e8c0606b2759f86492ccce718ffb3ca3f8c6a0c7ca8
     container_name: report
     ports:
       - '3337:3337'

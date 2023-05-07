@@ -104,48 +104,6 @@ docker ps -a
 <br/>
 <br/>
 
-<h3>Access the Docker container from the terminal:</h3>
-
-```
-docker exec -it report-db bash
-```
-
-```
-psql -U postgres
-```
-
-<br/>
-<br/>
-
-<h3>Create Database and User (inside the report-db container):</h3>
-
-```
-create database <database_name>;
-```
-
-```
-create user <username> with password '<password>';
-```
-
-```
-grant all privileges on database "<database_name>" to <username>;
-```
-
-```
-\c report
-```
-
-```
-grant usage, create on schema public to <username>;
-```
-
-```
-Ctrl + D
-```
-
-<br/>
-<br/>
-
 <h3>Run Migrations (Inside the report container):</h3>
 
 ```
