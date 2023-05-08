@@ -4,7 +4,7 @@ import { serverSuccess, serverError } from '@/presentation/helpers'
 import { customException } from '@/data/errors'
 
 type UpdatePasswordRequest = {
-  id: string
+  userId: string
   oldPassword: string
   newPassword: string
 }
@@ -14,7 +14,7 @@ export class UpdatePasswordController implements Controller {
 
   async handle(request: UpdatePasswordRequest): Promise<HttpResponse<string>> {
     try {
-      if (!request.id) {
+      if (!request.userId) {
         throw customException('Informe o ID do usuário')
       }
 
@@ -26,7 +26,7 @@ export class UpdatePasswordController implements Controller {
         throw customException('Informe a nova senha')
       }
 
-      const result = await this.updateUseCase.update(request.id, request.oldPassword, request.newPassword)
+      const result = await this.updateUseCase.update(request.userId, request.oldPassword, request.newPassword)
       return serverSuccess(result)
     } catch (error) {
       return serverError(error)
