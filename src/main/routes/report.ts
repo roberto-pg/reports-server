@@ -23,8 +23,8 @@ export default (router: Router): void => {
 
   router.patch(
     '/close-report/:id',
-    multer(multerConfig).single('imageUrl'),
     protectedRoute,
+    multer(multerConfig).single('imageUrl'),
     adaptRoute(updateReportController())
   )
 
