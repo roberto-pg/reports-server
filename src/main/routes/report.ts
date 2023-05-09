@@ -16,12 +16,10 @@ const multerConfig = require('../middlewares/multer')
 export default (router: Router): void => {
   router.post(
     '/start-report',
-    multer(multerConfig).single('imageUrl'),
     protectedRoute,
+    multer(multerConfig).single('imageUrl'),
     adaptRoute(addReportController())
   )
-
-  router.get('/all-reports-by-user', protectedRoute, adaptRoute(loadReportsByUserController()))
 
   router.patch(
     '/close-report/:id',
@@ -29,6 +27,8 @@ export default (router: Router): void => {
     protectedRoute,
     adaptRoute(updateReportController())
   )
+
+  router.get('/all-reports-by-user', protectedRoute, adaptRoute(loadReportsByUserController()))
 
   router.get('/report-by-id/:reportId', protectedRoute, adaptRoute(loadReportByIdController()))
 
