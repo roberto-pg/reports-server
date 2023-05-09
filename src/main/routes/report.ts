@@ -17,15 +17,15 @@ export default (router: Router): void => {
   router.post(
     '/start-report',
     protectedRoute,
-    multer(multerConfig).single('imageUrl'),
-    adaptRoute(addReportController())
+    adaptRoute(addReportController()),
+    multer(multerConfig).single('imageUrl')
   )
 
   router.patch(
     '/close-report/:id',
     protectedRoute,
-    multer(multerConfig).single('imageUrl'),
-    adaptRoute(updateReportController())
+    adaptRoute(updateReportController()),
+    multer(multerConfig).single('imageUrl')
   )
 
   router.get('/all-reports-by-user', protectedRoute, adaptRoute(loadReportsByUserController()))
