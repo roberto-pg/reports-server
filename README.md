@@ -66,7 +66,7 @@ DIR_IMAGE=http://localhost:8080/reports/
 ### This Server uses Nginx to provide static images of the book covers. Install the Nginx container before running docker-compose:
 
 ```
-docker run -d --name nginx -p 8080:80 --restart always -v /home/<user>/docker/nginx/reports:/usr/share/nginx/html/reports nginx               
+docker run -d --name nginx -p 8080:80 --restart always -v /home/<user>/docker/nginx:/usr/share/nginx/html nginx         
 ```
 
 <br/>
