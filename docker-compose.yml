@@ -28,7 +28,7 @@ services:
     volumes:
       - .:/usr/app
       - /home/rpg/docker/nginx/reports:/usr/app/public/images
-    command: sh -c "npm install && npm run build && npm start"
+    command: sh -c "npm start"
     restart: always
     networks:
       - report-net

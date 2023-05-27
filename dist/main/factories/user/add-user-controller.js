@@ -1,0 +1,20 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.addUserController = void 0;
+const user_1 = require("@/data/usecases/user");
+const postgres_1 = require("@/infra/db/postgres");
+const user_2 = require("@/infra/repositories/user");
+const user_3 = require("@/presentation/controllers/user");
+const validators_1 = require("@/validation/validators");
+const cryptography_1 = require("@/infra/cryptography");
+const addUserController = () => {
+    const prisma = new postgres_1.PrismaServer();
+    const userRepository = new user_2.UserRepositoryImpl(prisma);
+    const authRepository = new user_2.AuthRepositoryImpl(prisma);
+    const emailValidator = new validators_1.EmailValidatorImpl();
+    const cpfValidator = new validators_1.CpfValidatorImpl();
+    const hasher = new cryptography_1.BcryptAdapter();
+    const userAdd = new user_1.AddUserUseCaseImpl(userRepository, authRepository, emailValidator, cpfValidator, hasher);
+    return new user_3.AddUserController(userAdd);
+};
+exports.addUserController = addUserController;

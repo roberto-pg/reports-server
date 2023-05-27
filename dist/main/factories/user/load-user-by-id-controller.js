@@ -1,0 +1,14 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.loadUserByIdController = void 0;
+const user_1 = require("@/presentation/controllers/user");
+const user_2 = require("@/data/usecases/user");
+const user_3 = require("@/infra/repositories/user");
+const postgres_1 = require("@/infra/db/postgres");
+const loadUserByIdController = () => {
+    const prisma = new postgres_1.PrismaServer();
+    const repository = new user_3.UserRepositoryImpl(prisma);
+    const userIdUseCase = new user_2.LoadUserByIdUseCaseImpl(repository);
+    return new user_1.LoadUserByIdController(userIdUseCase);
+};
+exports.loadUserByIdController = loadUserByIdController;
